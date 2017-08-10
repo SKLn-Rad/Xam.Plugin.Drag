@@ -19,7 +19,7 @@ namespace SampleDrag
         {
             Random rand = new Random(DateTime.Now.Second);
 
-            for (int i = 0; i != 50; i++)
+            for (int i = 0; i != 10; i++)
             {
                 int r = rand.Next(0, 255);
                 int g = rand.Next(0, 255);

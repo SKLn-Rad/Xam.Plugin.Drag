@@ -12,7 +12,6 @@ namespace SampleDrag
         public App()
         {
             InitializeComponent();
-
             MainPage = new SampleDrag.MainPage();
         }
 
