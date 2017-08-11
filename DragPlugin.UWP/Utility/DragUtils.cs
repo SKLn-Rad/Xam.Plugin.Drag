@@ -21,9 +21,12 @@ namespace DragPlugin.UWP.Utility
 
         public static bool IsChildSupported(View view, FrameworkElement control)
         {
+            return true;
+            /*
             if (control == null) return false;
             return SupportedViewTypes.Contains(view.GetType()) &&
                    SupportedFrameworkElementTypes.Contains(control.GetType());
+                   */
         }
 
     }

@@ -29,6 +29,7 @@ namespace DragPlugin.UWP.Renderers
 
         private void SetupElement(StackLayout layout)
         {
+            ContainerElement.PointerExited += OnPointerExited;
             layout.ChildAdded += OnChildAdded;
             layout.ChildRemoved += OnChildRemoved;
 
@@ -39,6 +40,7 @@ namespace DragPlugin.UWP.Renderers
 
         private void TeardownElement(StackLayout layout)
         {
+            ContainerElement.PointerExited -= OnPointerExited;
             layout.ChildAdded -= OnChildAdded;
             layout.ChildRemoved -= OnChildRemoved;
 
@@ -65,6 +67,11 @@ namespace DragPlugin.UWP.Renderers
             control.PointerMoved += OnPointerMoved;
         }
 
+        private void OnPointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            OnPointerReleased(sender, e);
+        }
+
         private void RemoveChild(View view)
         {
             if (_supportedChildren.ContainsValue(view))
@@ -83,9 +90,8 @@ namespace DragPlugin.UWP.Renderers
         {
             if (e.Pointer.PointerId == _currentPointer)
                 _currentPointer = uint.MaxValue;
-
-            var view = _supportedChildren[sender as FrameworkElement];
-            ((SortableStackLayout)Element).NotifyDragEnd(view);
+            
+            ((SortableStackLayout)Element).NotifyDragEnd();
         }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)

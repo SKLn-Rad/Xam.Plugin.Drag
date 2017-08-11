@@ -5,7 +5,16 @@
              xmlns:views="clr-namespace:DragPlugin.Views;assembly=DragPlugin"
              x:Class="SampleDrag.MainPage">
 
-    <views:SortableStackLayout x:Name="DragZone" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-    </views:SortableStackLayout>
+    <ScrollView Orientation="Horizontal">
+        <views:SortableStackLayout Orientation="Horizontal" x:Name="DragZone" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <!--
+            <BoxView HeightRequest="50" HorizontalOptions="FillAndExpand" BackgroundColor="DarkBlue" />
+            <Button HeightRequest="50" HorizontalOptions="FillAndExpand" BackgroundColor="Red" />
+            <Entry HeightRequest="50" HorizontalOptions="FillAndExpand" BackgroundColor="Blue" />
+            <Button HeightRequest="50" HorizontalOptions="FillAndExpand" BackgroundColor="Green" />
+            <BoxView HeightRequest="50" HorizontalOptions="FillAndExpand" BackgroundColor="DarkSeaGreen" />
+            -->
+        </views:SortableStackLayout>
+    </ScrollView>
 
 </ContentPage>

@@ -15,21 +15,16 @@ namespace SampleDrag
             CreateChildren();
         }
 
-        void CreateChildren()
+        private void CreateChildren()
         {
-            Random rand = new Random(DateTime.Now.Second);
-
-            for (int i = 0; i != 10; i++)
+            Random rand = new Random();
+            for (int i = 0; i != 50; i++)
             {
-                int r = rand.Next(0, 255);
-                int g = rand.Next(0, 255);
-                int b = rand.Next(0, 255);
-
                 DragZone.Children.Add(new BoxView()
                 {
-                    HeightRequest = 50,
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
-                    BackgroundColor = Color.FromRgb(r, g, b).WithLuminosity(.8).WithSaturation(.8)
+                    WidthRequest = 75,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    BackgroundColor = Color.FromRgb(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255)).WithLuminosity(.8).WithSaturation(.95)
                 });
             }
         }

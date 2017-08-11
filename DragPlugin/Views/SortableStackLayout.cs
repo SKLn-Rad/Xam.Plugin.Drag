@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Diagnostics;
+using Xamarin.Forms;
 
 namespace DragPlugin.Views
 {
@@ -13,48 +14,53 @@ namespace DragPlugin.Views
 
         internal void NotifyDragStart(View view)
         {
+            if (view == null) return;
+
             IsDragging = true;
             FocusedView = view;
+
+            RaiseChild(FocusedView);
 
             _startingX = view.TranslationX;
             _startingY = view.TranslationY;
         }
 
-        internal void NotifyDragEnd(View view)
+        internal void NotifyDragEnd()
         {
-            var currentPosition = Children.IndexOf(view);
-            int newPosition;
+            if (FocusedView == null) return;
 
-            // Calculate and remove
-            newPosition = Orientation == StackOrientation.Horizontal ? GetNewPositionHorizontally(view) : GetNewPositionVertically(view);
-            Children.RemoveAt(currentPosition);
+            var currentPosition = Children.IndexOf(FocusedView);
+            int newPosition = Orientation == StackOrientation.Horizontal ? GetNewPositionHorizontally(FocusedView) : GetNewPositionVertically(FocusedView);
 
-            // Restore translation
-            view.TranslationX = 0;
-            view.TranslationY = 0;
+            if (newPosition != currentPosition)
+            {
+                Children.RemoveAt(currentPosition);
+                Children.Insert(newPosition, FocusedView);
+            }
+            
+            FocusedView.TranslationX = 0;
+            FocusedView.TranslationY = 0;
 
-            // Insert and finalize
-            Children.Insert(newPosition, view);
             IsDragging = false;
             FocusedView = null;
         }
 
         internal void NotifyDrag(double newXTranslation, double newYTranslation)
         {
-            if (!IsDragging) return;
+            if (!IsDragging || FocusedView == null) return;
 
             FocusedView.TranslationX = newXTranslation;
             FocusedView.TranslationY = newYTranslation;
         }
 
-        private int GetNewPositionHorizontally(VisualElement view)
+        private int GetNewPositionHorizontally(View view)
         {
             var index = 0;
             var position = view.X + view.TranslationX;
             foreach (var child in Children)
             {
                 var viewPos = child.X + child.TranslationX;
-                if (position <= viewPos)
+                if (position < viewPos)
                     return index;
 
                 index++;
@@ -63,14 +69,14 @@ namespace DragPlugin.Views
             return index;
         }
 
-        private int GetNewPositionVertically(VisualElement view)
+        private int GetNewPositionVertically(View view)
         {
             var index = 0;
             var position = view.Y + view.TranslationY;
             foreach (var child in Children)
             {
                 var viewPos = child.Y + child.TranslationY;
-                if (position <= viewPos)
+                if (position < viewPos)
                     return index;
 
                 index++;

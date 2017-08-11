@@ -13,8 +13,11 @@ namespace DragPlugin.UWP.Utility
         public static FrameworkElement GetFrameworkElementFromView(View view)
         {
             var renderer = view.GetOrCreateRenderer();
-            var properties = renderer.GetType().GetRuntimeProperties().Where(p => p.Name.Equals("Control"));
 
+            if (view is Layout<View>)
+                return renderer.ContainerElement;
+
+            var properties = renderer.GetType().GetRuntimeProperties().Where(p => p.Name.Equals("Control"));
             var propertyInfos = properties as PropertyInfo[] ?? properties.ToArray();
             if (propertyInfos.Any())
                 return (FrameworkElement) propertyInfos.ElementAt(0).GetValue(renderer);
