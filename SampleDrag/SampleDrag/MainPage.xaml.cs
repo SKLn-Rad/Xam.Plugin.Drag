@@ -22,7 +22,7 @@ namespace SampleDrag
             {
                 DragZone.Children.Add(new BoxView()
                 {
-                    WidthRequest = 75,
+                    HeightRequest = 75,
                     VerticalOptions = LayoutOptions.FillAndExpand,
                     BackgroundColor = Color.FromRgb(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255)).WithLuminosity(.8).WithSaturation(.95)
                 });
