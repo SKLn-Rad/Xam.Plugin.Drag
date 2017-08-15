@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SimpleDragSample.Views;assembly=SimpleDragSample"
+             x:Class="SimpleDragSample.MainPage">
+
+    <views:DragStackLayout x:Name="SampleLayout">
+        <BoxView BackgroundColor="Brown" HeightRequest="50" />
+        <BoxView BackgroundColor="Aqua" HeightRequest="50" />
+        <BoxView BackgroundColor="Crimson" HeightRequest="50" />
+
+        <BoxView BackgroundColor="LawnGreen" HeightRequest="50" />
+        <BoxView BackgroundColor="LightCoral" HeightRequest="50" />
+        <BoxView BackgroundColor="DarkSlateBlue" HeightRequest="50" />
+
+        <BoxView BackgroundColor="Purple" HeightRequest="50" />
+        <BoxView BackgroundColor="DeepPink" HeightRequest="50" />
+    </views:DragStackLayout>
+
+</ContentPage>
